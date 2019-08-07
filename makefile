@@ -8,7 +8,7 @@ SRC = $(wildcard src/*.c)
 OBJ = $(SRC:%.c=$(BUILD_DIR)/%.o)
 DEP = $(OBJ:.o=.d)
 
-.PHONY: clean create_build_dir upload
+.PHONY: clean create_build_dir upload check
 
 all: create_build_dir $(BIN)
 
@@ -27,3 +27,6 @@ $(BIN): $(OBJ)
 $(BUILD_DIR)/%.o: %.c makefile
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -MMD -c -o $@ $<
+
+check: $(SRC)
+	cppcheck --enable=all --std=c11 --inconclusive --error-exitcode=1 $^

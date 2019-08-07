@@ -1,10 +1,3 @@
-/*
- * input.c
- *
- *  Created on: Oct 30, 2016
- *      Author: seeseemelk
- */
-
 #include "input.h"
 
 #include <avr/io.h>
@@ -61,11 +54,6 @@ char input_switches(void)
 	char sC = (i & SP2) > 0;
 	char sD = (i & SP3) > 0;
 	return (sB) | (sA<<1) | (sD<<2) | (sC<<3);
-}
-
-int input_battery(void)
-{
-	return 0;
 }
 
 void input_debounce_tick(void)

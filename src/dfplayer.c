@@ -1,4 +1,5 @@
 #include "dfplayer.h"
+
 #include "uart.h"
 
 #include <avr/io.h>
@@ -68,23 +69,3 @@ void dfplayer_init(void)
 
 	dfplayer_reset();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

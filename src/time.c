@@ -68,22 +68,22 @@ void time_add_seconds(u8 seconds)
 	time_split();
 }
 
-void time_get_hours(u8* h, u8* t)
+void time_get_hours(u8* hour_h, u8* hour_t)
 {
-	*h = s_hours_h;
-	*t = s_hours_t;
+	*hour_h = s_hours_h;
+	*hour_t = s_hours_t;
 }
 
-void time_get_minutes(u8* h, u8* t)
+void time_get_minutes(u8* minutes_h, u8* minutes_t)
 {
-	*h = s_minutes_h;
-	*t = s_minutes_t;
+	*minutes_h = s_minutes_h;
+	*minutes_t = s_minutes_t;
 }
 
-void time_get_seconds(u8* h, u8* t)
+void time_get_seconds(u8* seconds_h, u8* seconds_t)
 {
-	*h = s_seconds_h;
-	*t = s_seconds_t;
+	*seconds_h = s_seconds_h;
+	*seconds_t = s_seconds_t;
 }
 
 void time_set_calibration(u16 calibration)
@@ -123,22 +123,3 @@ void alarm_mute(void)
 	dfplayer_pause();
 	s_alarm_triggered = false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

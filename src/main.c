@@ -1,5 +1,3 @@
-//#define BAUD 9600UL
-
 #include "display.h"
 #include "input.h"
 #include "time.h"
@@ -25,7 +23,6 @@ static enum State state = S_DISPLAY;
 unsigned int seconds = 0;
 ISR(TIMER2_OVF_vect)
 {
-	//seconds = (seconds+1UL) % (60UL * 60UL * 24UL);
 	time_add_seconds(1);
 	display_update();
 }
@@ -34,14 +31,6 @@ ISR(TIMER0_COMP_vect)
 {
 	display_draw();
 	input_debounce_tick();
-}
-
-int max(int a, int b)
-{
-	if (a > b)
-		return a;
-	else
-		return b;
 }
 
 int min(int a, int b)
@@ -313,24 +302,3 @@ int main(void)
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
