@@ -17,6 +17,7 @@ upload: $(BIN)
 
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -f $(BIN)
 
 $(BIN): $(OBJ)
 	mkdir -p $(@D)
