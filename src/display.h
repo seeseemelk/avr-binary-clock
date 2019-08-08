@@ -1,6 +1,8 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include "cdefs.h"
+
 enum DisplayState
 {
 	DS_HOURS_MINUTES,

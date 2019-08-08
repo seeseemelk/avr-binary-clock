@@ -200,7 +200,6 @@ void state_set_alarm(void)
 		minutes_t = min(input_switches(), 9);
 		flash_display(hours_h, hours_t, minutes_h, minutes_t, 3);
 	}
-	input_debounce_released();
 
 	alarm_set(
 			hours_h * 10 + hours_t,
@@ -208,6 +207,7 @@ void state_set_alarm(void)
 	);
 
 	state = STATE_DISPLAY;
+	input_debounce_released();
 }
 
 void state_calibrate(void)
@@ -267,7 +267,6 @@ int main(void)
 	display_init();
 
 	time_set(12, 48, 50);
-	alarm_set(12, 49);
 
 	// Setup timer 2
 	ASSR |= (1<<AS2);

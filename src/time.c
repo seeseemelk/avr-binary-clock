@@ -5,14 +5,18 @@
 
 #include <stdbool.h>
 #include <avr/eeprom.h>
+#include <avr/interrupt.h>
 
 static u8 s_hours, s_minutes, s_seconds;
 static u8 s_hours_h, s_hours_t, s_minutes_h, s_minutes_t, s_seconds_h, s_seconds_t;
 static u8 s_alarm_hours, s_alarm_minutes;
 static u16 s_calibration;
-static u16 EEMEM e_calibration;
 static bool s_alarm_triggered = false;
 static i16 s_seconds_until_calibration = 0;
+
+static u8 EEMEM e_alarm_hours = 8;
+static u8 EEMEM e_alarm_minutes = 30;
+static u16 EEMEM e_calibration = 0;
 
 static void time_split(void)
 {
@@ -30,6 +34,9 @@ void time_init(void)
 {
 	s_calibration = eeprom_read_word(&e_calibration);
 	s_seconds_until_calibration = s_calibration & 0x7FFF;
+
+	s_alarm_hours = eeprom_read_byte(&e_alarm_hours);
+	s_alarm_minutes = eeprom_read_byte(&e_alarm_minutes);
 }
 
 void time_set(u8 hours, u8 minutes, u8 seconds)
@@ -89,7 +96,10 @@ void time_get_seconds(u8* seconds_h, u8* seconds_t)
 void time_set_calibration(u16 calibration)
 {
 	s_calibration = calibration;
+
+	cli();
 	eeprom_update_word(&e_calibration, s_calibration);
+	sei();
 }
 
 u16 time_get_calibration(void)
@@ -110,6 +120,11 @@ void alarm_set(u8 hours, u8 minutes)
 {
 	s_alarm_hours = hours;
 	s_alarm_minutes = minutes;
+
+	cli();
+	eeprom_update_byte(&e_alarm_hours, s_alarm_hours);
+	eeprom_update_byte(&e_alarm_minutes, s_alarm_minutes);
+	sei();
 }
 
 void alarm_get(u8* hours, u8* minutes)
